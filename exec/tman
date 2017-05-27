@@ -1,0 +1,16 @@
+##!/bin/zsh
+CALLER_PATH=$PWD
+cd `dirname $0`
+cd ../src
+case "$1" in
+    init)
+    if  [ -z "$2" ];
+    then node ./control/manager.js $1 $CALLER_PATH
+    else node ./control/manager.js $1 $2
+    fi
+    ;;
+    clear)
+    node ./control/manager.js $1
+esac
+
+# cd -

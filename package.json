@@ -1,0 +1,30 @@
+{
+  "name": "tagsystem",
+  "version": "1.0.0",
+  "description": "manager file floder by tag",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha",
+    "autotest": "./node_modules/.bin/supervisor -q -n exit -x ./node_modules/.bin/mocha -- -b"
+  },
+  "keywords": [
+    "tag",
+    "node",
+    "pkm"
+  ],
+  "author": "wucong",
+  "license": "ISC",
+  "dependencies": {
+    "chai": "^3.5.0",
+    "expect.js": "^0.3.1",
+    "is-valid-path": "^0.1.1",
+    "mocha": "^3.4.1",
+    "remove": "^0.1.5",
+    "shelljs": "^0.7.7",
+    "sqlite3": "^3.1.8",
+    "supervisor": "^0.12.0"
+  }
+}
