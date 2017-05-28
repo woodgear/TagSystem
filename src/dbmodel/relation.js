@@ -25,7 +25,7 @@ class relationModel extends dbmodel {
 
     async create(tagId, objectId) {
         return new Promise((resolve, reject) => {
-            this.model.run("insert into relation (tagid,objectid) values (?,?)", [tagId, objectId], (e) => {
+            this.model.run("insert or replace into relation (tagid,objectid) values (?,?)", [tagId, objectId], (e) => {
                 if (e) {
                     reject(e);
                 }

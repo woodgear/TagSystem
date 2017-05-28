@@ -30,11 +30,11 @@ class appendControl {
     async tagDirectory(tag, directory) {
     }
 
-    async tagFile(tag, path) {
-        console.log("tag file",tag,path)
-        // if(fs.existsSync(path)){
-        //     if(fs.con)
-        // }
+    async tagFile(tags, path) {
+        for (let tag of tags) {
+            await this.append.append(path,tag)
+
+        }
     }
     async tagContent(tag, obj) {
 
