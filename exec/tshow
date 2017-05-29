@@ -1,0 +1,5 @@
+##!/bin/zsh
+CALLER_PATH=$PWD
+cd `dirname $0`
+cd ../src
+node ./control/showControl.js $@

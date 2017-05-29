@@ -29,7 +29,6 @@ class Manager {
     //remove config.js
     //remove .tagsys in target path
     async clear() {
-        console.log("clear", config.getPath())
         if (fs.existsSync(config.getPath())) {
             remove.removeSync(config.getPath());
         }

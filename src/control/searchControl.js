@@ -4,17 +4,18 @@ class searchControl {
         this.model = new Search();
     }
     async search(tags) {
-        return this.model.include(tags);
+        const objects = await this.model.include(tags);
+        objects.map((object) => {
+            console.log(object);
+        })
+
     }
 }
 
 async function main() {
     const control = new searchControl();
     tags = process.argv.slice(2)
-    const objects = await control.search(tags);
-    objects.map((object) => {
-        console.log(object);
-    })
+    await control.search(tags);
     process.exit();
 }
 
