@@ -32,9 +32,9 @@ class appendControl {
 
     async tagFile(tags, path) {
         for (let tag of tags) {
-            await this.append.append(path,tag)
-
+            await this.append.append(path, tag)
         }
+        console.log(`append tag [${tags.join(" ")}] in "${path}"`)
     }
     async tagContent(tag, obj) {
 

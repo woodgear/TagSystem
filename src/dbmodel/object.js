@@ -1,15 +1,15 @@
 const config = require('../model/config');
 const sqlite3 = require('sqlite3')
-const dbmodel=require("./dbmodel")
+const dbmodel = require("./dbmodel")
 //啧 手动orm吗?
-class objectModel extends dbmodel{
+class objectModel extends dbmodel {
     constructor() {
         super()
     }
     async getObjects(objectIds) {
         const objects = [];
-        for (let obj of objectIds) {
-            const data = await this._getObject(obj.objectid);
+        for (let id of objectIds) {
+            const data = await this._getObject(id);
             objects.push(data);
         }
         return objects;

@@ -33,21 +33,31 @@ class tagModel extends dbmodel {
             });
         });
     }
+    //[id*]
     async getIds(tags) {
         const ids = [];
         for (let tag of tags) {
-            const id = await this._getId(tag);
-            ids.push({ id, tag });
+            try {
+                const id = await this._getId(tag);
+                ids.push(id);
+            } catch (e) {
+            }
         }
         return ids;
     }
+
+    //->option(id:string,null)
     async _getId(tag) {
         return new Promise((resolve, reject) => {
-            this.model.get("select id from tag where name=?", tag, (e, r) => {
+            this.model.get("select id from tag where name=?", [tag], (e, r) => {
                 if (e) {
                     reject(e);
                 }
-                resolve(r.id);
+                if (r === undefined) {
+                    reject(`could tag found the id of ${tag}`);
+                } else {
+                    resolve(r.id);
+                }
             });
         });
     }

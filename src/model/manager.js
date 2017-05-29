@@ -16,9 +16,11 @@ class Manager {
         //create .tagsys init .tagsys/tagsys.db 
         const folderpath = `${path}/.tagsys`;
         const dbpath = `${folderpath}/${dbname}`
-        fs.mkdirSync(folderpath);
-        const db = spawn("sqlite3", [dbpath])
-        shell.exec(`sqlite3 ${dbpath} <${intitSqlPath}`)
+        if (!fs.existsSync(folderpath)) {
+            fs.mkdirSync(folderpath);
+            const db = spawn("sqlite3", [dbpath])
+            shell.exec(`sqlite3 ${dbpath} <${intitSqlPath}`)
+        }
         config.setPath(`${path}/.tagsys`);
     }
     async removeTag(obj, tag) {
@@ -27,8 +29,11 @@ class Manager {
     //remove config.js
     //remove .tagsys in target path
     async clear() {
-        remove.removeSync(config.getPath());
-        config.setPath({ path: "" });
+        console.log("clear", config.getPath())
+        if (fs.existsSync(config.getPath())) {
+            remove.removeSync(config.getPath());
+        }
+        config.setPath("");
     }
 }
 

@@ -16,8 +16,15 @@ describe('manager', function () {
         `${path}/.tagsys/tagsys.db`,
     ];
     describe("#init", () => {
+        before(() => {
+            if (fs.existsSync(`${path}/.tagsys`)) {
+                remove.removeSync(`${path}/.tagsys`)
+            }
+        })
         after(() => {
-            remove.removeSync(`${path}/.tagsys`)
+            if (fs.existsSync(`${path}/.tagsys`)) {
+                remove.removeSync(`${path}/.tagsys`)
+            }
         })
 
         it('should create a .tagsys and .tagsys/tagsys.db in spc path', async () => {

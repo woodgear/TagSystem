@@ -6,19 +6,18 @@ class relationModel extends dbmodel {
     constructor() {
         super()
     }
-    async getObjectByTagIds(tagids) {
-        const ids = [];
-        for (let tag of tagids) {
-            ids.push(tag.id)
-        }
-        const inids = ids.join(',')
-
+    async getObjectIdByTagId(tagid) {
         return new Promise((resolve, reject) => {
-            this.model.all(`select distinct objectid from  relation where tagid in (${inids})`, (e, r) => {
+            this.model.all(`select objectid from relation where tagid=${tagid}`, (e, r) => {
                 if (e) {
                     reject(e);
+                } else {
+                    const res=[]
+                    for(let item of r){
+                        res.push(item.objectid)
+                    }
+                    resolve(res);
                 }
-                resolve(r);
             });
         });
     }
