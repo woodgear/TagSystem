@@ -36,7 +36,7 @@ async function main() {
 
     const basePath = fs.realpathSync(params.shift());
 
-    const obj = params.pop();
+    const obj = params.shift();
     const tags = params;
 
     let { isRealPath, res } = common.isRealPath(basePath, obj);
