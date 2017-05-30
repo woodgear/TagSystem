@@ -14,6 +14,7 @@ class Manager {
     }
     async init(path) {
         //create .tagsys init .tagsys/tagsys.db 
+        path=fs.realpathSync(path);
         const folderpath = `${path}/.tagsys`;
         const dbpath = `${folderpath}/${dbname}`
         if (!fs.existsSync(folderpath)) {

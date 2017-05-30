@@ -1,0 +1,15 @@
+#compdef tas
+
+_tas() { 
+    local curcontext="$curcontext" state line
+    typeset -A opt_args
+    _arguments '*: :->tas'
+ 
+    case $state in
+    tas)
+            compadd "$@"  `tshow`
+    ;;   
+    esac
+}
+ 
+_tas "$@"

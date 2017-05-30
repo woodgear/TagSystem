@@ -7,7 +7,7 @@ class Config {
     static setPath(path) {
         const configString = fs.readFileSync(congfigPath).toString();
         const configJson = JSON.parse(configString);
-        configJson.path = fs.realpathSync(path);
+        configJson.path = path;
         fs.writeFileSync(congfigPath, JSON.stringify(configJson));
     }
     static getPath() {

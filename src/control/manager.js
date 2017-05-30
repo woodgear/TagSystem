@@ -23,8 +23,6 @@ async function main() {
     switch (argv[2]) {
         case "init":
             const path = argv[3]
-            let { status, reason } = common.isInvaildDirectoryPath(path)
-            if (!status) { console.log(reason); process.exit(); }
             await control.init(path)
             break;
         case "clear":

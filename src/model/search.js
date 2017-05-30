@@ -35,7 +35,11 @@ class Search {
         const res = objects.sort((a, b) => { return a.createtime < b.createtime });
         const contents = [];
         res.map((obj) => {
-            contents.push(Path.join(config.getPath(), obj.object));
+            if (obj.type == "file") {
+                contents.push(Path.join(config.getPath(), obj.object));
+            }else if (obj.type=="content"){
+                contents.push(obj.object)
+            }
         });
         return contents;
     }

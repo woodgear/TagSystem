@@ -4,18 +4,19 @@ const append = require('../src/model/append');
 const manager = require('../src/model/manager');
 const Search = require('../src/model/search');
 describe('search', function () {
-    const man = new manager();
-    before(async () => {
-        await man.clear();
-        await man.init(__dirname);
-    })
-    after(async () => {
-        await man.clear();
-    })
     describe('#include', function () {
+        const man = new manager();
+        beforeEach(async () => {
+            await man.clear();
+            await man.init(__dirname);
+        })
+        afterEach(async () => {
+            await man.clear();
+        })
+
         it('should return the objects which be taged', async () => {
             const app = new append();
-            await app.append('object', 'tag');
+            await app.append({ type: "content", object: 'object' }, 'tag');
             const search = new Search();
             const objects = await search.include('tag');
         });
@@ -27,13 +28,13 @@ describe('search', function () {
         it('should return the objects which be taged', async () => {
             const app = new append();
 
-            await app.append('object', 'tag');
+            await app.append({ type: "content", object: 'object' }, 'tag');
 
-            await app.append('object3', 'tag');
-            await app.append('object3', 'tag1');
+            await app.append({ type: "content", object: 'object3' }, 'tag');
+            await app.append({ type: "content", object: 'object3' }, 'tag1');
 
-            await app.append('object1', 'tag');
-            await app.append('object1', 'tag1');
+            await app.append({ type: "content", object: 'object1' }, 'tag');
+            await app.append({ type: "content", object: 'object1' }, 'tag1');
 
 
             const search = new Search();
@@ -43,11 +44,13 @@ describe('search', function () {
         it('should return the objects which be taged with a no exists tag', async () => {
             const app = new append();
 
-            await app.append('object', 'tag');
-            await app.append('object3', 'tag');
-            await app.append('object3', 'tag1');
-            await app.append('object1', 'tag');
-            await app.append('object1', 'tag1');
+            await app.append({ type: "content", object: 'object' }, 'tag');
+
+            await app.append({ type: "content", object: 'object3' }, 'tag');
+            await app.append({ type: "content", object: 'object3' }, 'tag1');
+
+            await app.append({ type: "content", object: 'object1' }, 'tag');
+            await app.append({ type: "content", object: 'object1' }, 'tag1');
 
             const search = new Search();
             const objects = await search.include(['tag', 'tag1', 'tag3']);

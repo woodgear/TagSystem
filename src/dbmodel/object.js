@@ -16,7 +16,7 @@ class objectModel extends dbmodel {
     }
     async _getObject(id) {
         return new Promise((resolve, reject) => {
-            this.model.get("select object,createtime from object where id=?", id, (e, r) => {
+            this.model.get("select object,createtime,type from object where id=?", id, (e, r) => {
                 if (e) {
                     reject(e);
                 }
@@ -26,7 +26,7 @@ class objectModel extends dbmodel {
     }
     async has(obj) {
         return new Promise((resolve, reject) => {
-            this.model.get("select count(*) as count from object where object=?", obj, (e, r) => {
+            this.model.get("select count(*) as count from object where object=? and type=?", [obj.object,obj.type], (e, r) => {
                 if (e) {
                     reject(e);
                 }
@@ -44,7 +44,7 @@ class objectModel extends dbmodel {
     }
     async create(obj) {
         await new Promise((resolve, reject) => {
-            this.model.run("insert into object (object) values (?)", obj, (e, r) => {
+            this.model.run("insert into object (object,type) values (?,?)", [obj.object,obj.type], (e, r) => {
                 if (e) {
                     reject(e);
                 }
@@ -54,9 +54,9 @@ class objectModel extends dbmodel {
 
     }
 
-    async _getId(object) {
+    async _getId(obj) {
         return new Promise((resolve, reject) => {
-            this.model.get("select id from object where object=?", object, (e, r) => {
+            this.model.get("select id from object where object=? and type=?", [obj.object,obj.type], (e, r) => {
                 if (e) {
                     reject(e);
                 }
