@@ -21,7 +21,7 @@ class Manager {
             const db = spawn("sqlite3", [dbpath])
             shell.exec(`sqlite3 ${dbpath} <${intitSqlPath}`)
         }
-        config.setPath(`${path}/.tagsys`);
+        config.setPath(path);
     }
     async removeTag(obj, tag) {
 
@@ -29,8 +29,9 @@ class Manager {
     //remove config.js
     //remove .tagsys in target path
     async clear() {
-        if (fs.existsSync(config.getPath())) {
-            remove.removeSync(config.getPath());
+        const path=`${config.getPath()}/.tagsys`;
+        if (fs.existsSync(path)) {
+            remove.removeSync(path);
         }
         config.setPath("");
     }
