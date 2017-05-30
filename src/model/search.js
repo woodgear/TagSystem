@@ -1,6 +1,6 @@
-const dbobj = require('../../util/dbobj')
-
-
+const dbobj = require('../../util/dbobj');
+const Path = require('path');
+const config = require('../model/config');
 function sortByRepetition(data) {
     //console.log("data=>", data);
     const bucket = {}
@@ -35,7 +35,7 @@ class Search {
         const res = objects.sort((a, b) => { return a.createtime < b.createtime });
         const contents = [];
         res.map((obj) => {
-            contents.push(obj.object);
+            contents.push(Path.join(config.getPath(), obj.object));
         });
         return contents;
     }

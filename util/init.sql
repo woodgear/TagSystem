@@ -1,6 +1,7 @@
 create table object(
     id INTEGER PRIMARY KEY,
     object text unique not null,
+    type text DEFAULT "content",
     createtime   Timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
     );
 

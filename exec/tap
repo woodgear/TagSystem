@@ -2,5 +2,5 @@
 CALLER_PATH=$PWD
 cd `dirname $0`
 cd ../src
-node ./control/appendControl $@
+node ./control/appendControl $CALLER_PATH $@
 # cd -
