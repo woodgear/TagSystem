@@ -16,11 +16,11 @@ class objectModel extends dbmodel {
     }
     async _getObject(id) {
         return new Promise((resolve, reject) => {
-            this.model.get("select object from object where id=?", id, (e, r) => {
+            this.model.get("select object,createtime from object where id=?", id, (e, r) => {
                 if (e) {
                     reject(e);
                 }
-                resolve(r.object);
+                resolve(r);
             });
         });
     }

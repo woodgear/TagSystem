@@ -32,7 +32,12 @@ class Search {
         }
         const objecids = sortByRepetition(data);
         const objects = await this.object.getObjects(objecids);
-        return objects;
+        const res = objects.sort((a, b) => { return a.createtime < b.createtime });
+        const contents = [];
+        res.map((obj) => {
+            contents.push(obj.object);
+        });
+        return contents;
     }
 }
 

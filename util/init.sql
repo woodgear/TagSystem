@@ -1,6 +1,7 @@
 create table object(
     id INTEGER PRIMARY KEY,
-    object text unique not null 
+    object text unique not null,
+    createtime   Timestamp DATETIME DEFAULT CURRENT_TIMESTAMP
     );
 
 create table tag(
