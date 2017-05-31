@@ -26,7 +26,7 @@ class objectModel extends dbmodel {
     }
     async has(obj) {
         return new Promise((resolve, reject) => {
-            this.model.get("select count(*) as count from object where object=? and type=?", [obj.object,obj.type], (e, r) => {
+            this.model.get("select count(*) as count from object where object=? and type=?", [obj.object, obj.type], (e, r) => {
                 if (e) {
                     reject(e);
                 }
@@ -44,7 +44,7 @@ class objectModel extends dbmodel {
     }
     async create(obj) {
         await new Promise((resolve, reject) => {
-            this.model.run("insert into object (object,type) values (?,?)", [obj.object,obj.type], (e, r) => {
+            this.model.run("insert into object (object,type) values (?,?)", [obj.object, obj.type], (e, r) => {
                 if (e) {
                     reject(e);
                 }
@@ -56,7 +56,7 @@ class objectModel extends dbmodel {
 
     async _getId(obj) {
         return new Promise((resolve, reject) => {
-            this.model.get("select id from object where object=? and type=?", [obj.object,obj.type], (e, r) => {
+            this.model.get("select id from object where object=? and type=?", [obj.object, obj.type], (e, r) => {
                 if (e) {
                     reject(e);
                 }
@@ -67,11 +67,12 @@ class objectModel extends dbmodel {
     }
     async updateObj(orginObj, newObj) {
         return new Promise((resolve, reject) => {
-            this.model.get("update object set object=? where object=?", [orginObj, newObj], (e, r) => {
+            this.model.run("update object set object=?,type=? where object=? and type=?", [newObj.object, newObj.type,orginObj.object, orginObj.type], (e, r) => {
                 if (e) {
                     reject(e);
+                } else {
+                    resolve();
                 }
-                resolve(r.id);
             });
         });
     }

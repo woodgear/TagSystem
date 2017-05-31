@@ -4,8 +4,8 @@ class move {
     constructor() {
         this.object = dbobj.get('object');
     }
-    move(src, dest) {
-        this.object.updateObj(src, dest);
+    async move(src, dest) {
+       await this.object.updateObj({object:src,type:"file"}, {object:dest,type:"file"});
     }
 }
 
